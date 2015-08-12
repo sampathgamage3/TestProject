@@ -121,3 +121,21 @@ function register_my_menus() {
 add_action('init', 'create_my_taxonomies', 0);
 
 
+// Theme featured image meta 
+function theme_featured_image_meta( $content ) {
+        global $post;
+        $type = get_post_type($post->ID);
+        if($type=="team"){
+        $text = __( "Individual Image size in Team should be 98x98 .", 'textdomain' );
+        $id = 'hide_featured_image';
+        $value = esc_attr( get_post_meta( $post->ID, $id, true ) );
+        $label = '<label for="' . $id . '" class="selectit">' . $text .'</label>';
+        
+        
+        return $content .= $label;
+        }else {
+          return $content ;   
+        }
+    }
+
+
