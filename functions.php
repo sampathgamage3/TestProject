@@ -2,6 +2,7 @@
 
 
 
+
 add_theme_support( 'post-thumbnails' ); 
 
 add_action( 'init', 'register_my_menus' );
@@ -87,26 +88,7 @@ function register_my_menus() {
 
     
     function create_my_taxonomies() {
-	 /* register_taxonomy(
-	'News Types',
-	 'newspress',
-	 array(
-            "hierarchical" => true,
-            "label" => "News Types",
-            "singular_label" => "news types",
-            'update_count_callback' => '_update_post_term_count',
-            'query_var' => true,
-                'rewrite' => array( 
-                   'slug' => 'news-types',
-                    'with_front' => true 
-                 ),
-            'public' => true,
-            'show_ui' => true,
-            'show_admin_column' => true,
-            'show_tagcloud' => true,
-            '_builtin' => false,
-            'show_in_nav_menus' => false)
-	  );  */
+	 
 	register_taxonomy(
 	'Team Types',
 	 'team',
@@ -137,3 +119,5 @@ function register_my_menus() {
     }
 
 add_action('init', 'create_my_taxonomies', 0);
+
+
