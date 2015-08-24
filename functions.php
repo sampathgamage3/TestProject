@@ -36,54 +36,7 @@ function register_my_menus() {
         'thumbnail',
         'page-attributes',)
         ) );
-         register_post_type('pressrelease', array(
-        'label' => 'Press Release',
-        'public' => true,
-        'taxonomies' => array(''),
-        'show_ui' => true,
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'rewrite' => array('slug' => 'pressrelease'),
-        'query_var' => true,
-        'supports' => array(
-        'title',
-        'editor',
-        'revisions',
-        'thumbnail',
-        'page-attributes',)
-        ) );
-        register_post_type('team', array(
-        'label' => 'Team Members',
-        'public' => true,
-        'taxonomies' => array(''),
-        'show_ui' => true,
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'rewrite' => array('slug' => 'team'),
-        'query_var' => true,
-        'supports' => array(
-        'title',
-        'editor',
-        'revisions',
-        'thumbnail',
-        'page-attributes',)
-        ) );
-         register_post_type('webcast', array(
-        'label' => 'Webcast Videos',
-        'public' => true,
-        'taxonomies' => array(''),
-        'show_ui' => true,
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'rewrite' => array('slug' => 'webcast'),
-        'query_var' => true,
-        'supports' => array(
-        'title',
-        'editor',
-        'revisions',
-        'thumbnail',
-        'page-attributes',)
-        ) );
+         
     }
 
     
@@ -137,5 +90,24 @@ function theme_featured_image_meta( $content ) {
           return $content ;   
         }
     }
+    
+    
+    // for custom serach with all post types
+    
+    function include_post_types_in_search($query) {
+	if(is_search()) {
+		$post_types = get_post_types(array('public' => true, 'exclude_from_search' => false), 'objects');
+		$searchable_types = array();
+		if($post_types) {
+			foreach( $post_types as $type) {
+                            if($type->name!='team' && $type->name!='newsevents' && $type->name!='press' && $type->name!='partners')
+				$searchable_types[] = $type->name;
+			}
+		}
+		$query->set('post_type', $searchable_types);
+	}
+	return $query;
+}
+add_action('pre_get_posts', 'include_post_types_in_search');
 
 
