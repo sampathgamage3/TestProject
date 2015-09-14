@@ -159,4 +159,9 @@ function theme_featured_image_meta( $content ) {
 	add_filter('pre_site_transient_update_plugins','remove_core_updates');
 	add_filter('pre_site_transient_update_themes','remove_core_updates');
 	
-
+// add tag support to pages
+	function tags_support_all() {
+		register_taxonomy_for_object_type('post_tag', 'page');
+	}
+	
+	add_action('init', 'tags_support_all');
