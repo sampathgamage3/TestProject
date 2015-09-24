@@ -2,9 +2,11 @@
 
 
 
+//Enable Featured Image in Custom Themes
 
 add_theme_support( 'post-thumbnails' ); 
 
+// Register Wp Menu on wordpress
 add_action( 'init', 'register_my_menus' );
 
 function register_my_menus() {
