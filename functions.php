@@ -2,20 +2,20 @@
 
 
 
-//Enable Featured Image in Custom Themes
+    //Enable Featured Image in Custom Themes
 
-add_theme_support( 'post-thumbnails' ); 
+    add_theme_support( 'post-thumbnails' ); 
 
-// Register Wp Menu on wordpress
-add_action( 'init', 'register_my_menus' );
+    // Register Wp Menu on wordpress
+    add_action( 'init', 'register_my_menus' );
 
-function register_my_menus() {
-    register_nav_menus(
-    array(
-    'main_menu' => __( 'Main Menu' ) 
-    )
-    );
-}
+    function register_my_menus() {
+        register_nav_menus(
+        array(
+        'main_menu' => __( 'Main Menu' ) 
+        )
+        );
+    }
 
   // custom post_type
     add_action( 'init', 'create_posttype' );
@@ -41,6 +41,7 @@ function register_my_menus() {
          
     }
 
+    add_action('init', 'create_my_taxonomies', 0);
     
     function create_my_taxonomies() {
 	 
@@ -67,16 +68,17 @@ function register_my_menus() {
 	 
 }
 
+// return content without quotes
  function removequoats($content){
         $content = str_replace('"','&quot' , $content);
         $content = str_replace("'",'&#039' , $content);
         return $content;
     }
 
-add_action('init', 'create_my_taxonomies', 0);
 
 
-// Theme featured image meta 
+
+// Theme featured image meta massage
 function theme_featured_image_meta( $content ) {
         global $post;
         $type = get_post_type($post->ID);
