@@ -1,2 +1,2 @@
 # TestProject
-All Testing Files
+This is WordPress Function.php Page
